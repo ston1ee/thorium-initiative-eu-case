@@ -501,42 +501,7 @@
             backdrop-filter: blur(10px);
         }
 
-            /* Feedback Section */
-            .feedback-section {
-                background: rgba(52, 73, 94, 0.7);
-                padding: 40px;
-                border-radius: 20px;
-                margin: 40px 0;
-                backdrop-filter: blur(10px);
-                text-align: center;
-            }
-            .feedback-section h2 {
-                color: var(--eu-yellow);
-                margin-bottom: 20px;
-            }
-            .feedback-form input,
-            .feedback-form textarea {
-                width: 80%;
-                padding: 10px;
-                margin-bottom: 15px;
-                border-radius: 8px;
-                border: 1px solid #bdc3c7;
-                font-size: 1rem;
-            }
-            .feedback-form button {
-                background: var(--eu-blue);
-                color: #fff;
-                border: none;
-                border-radius: 8px;
-                padding: 10px 30px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: background 0.2s;
-            }
-            .feedback-form button:hover {
-                background: var(--eu-yellow);
-                color: var(--eu-blue);
-            }
+            /* feedback section removed */
 
         /* Trademark */
         .trademark {
@@ -649,7 +614,6 @@
                     <a href="#timeline" data-i18n="nav.timeline">Plan</a>
                     <a href="#impact" data-i18n="nav.impact">EU Analyse</a>
                     <a href="#quiz" data-i18n="nav.quiz">Quiz</a>
-                    <a href="#feedback" data-i18n="nav.feedback">Feedback</a>
                 </div>
                 <button class="lang-switch" aria-label="Skift sprog">EN/DA</button>
             </div>
@@ -712,10 +676,53 @@
                 <section class="section" id="solution">
                 <h2 class="section-title">Løsningen: Thorium Initiative</h2>
                 
-                <div class="thorium-cycle">
-                    <h3>Thorium-232 → Uran-233 Cyklus</h3>
-                    <div class="atom-animation"></div>
-                    <p>Thorium-232 bombarderes med neutroner og omdannes til fissile Uran-233, som kan bruges i atomreaktorer. Processen producerer mindre radioaktivt affald og er inherent sikker.</p>
+                <div class="thorium-cycle" role="img" aria-label="Thorium to Uranium cycle diagram">
+                    <h3 data-i18n="diagram.title">Thorium-232 → Uran-233 Cyklus</h3>
+                    <!-- SVG explanatory diagram -->
+                    <svg width="100%" height="260" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
+                                <path d="M0,0 L10,5 L0,10 L3,5 z" fill="#95a5a6" />
+                            </marker>
+                            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0052b4" />
+                                <stop offset="100%" stop-color="#ffd700" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Thorium node -->
+                        <g id="thorium" transform="translate(90,60)">
+                            <circle cx="80" cy="60" r="50" fill="rgba(0,82,180,0.15)" stroke="#0052b4" stroke-width="3" />
+                            <text x="80" y="65" text-anchor="middle" fill="#ecf0f1" font-size="14" font-weight="700">Th-232</text>
+                        </g>
+
+                        <!-- Protactinium node -->
+                        <g id="protactinium" transform="translate(320,60)">
+                            <circle cx="80" cy="60" r="50" fill="rgba(0,82,180,0.08)" stroke="#7f8c8d" stroke-width="3" />
+                            <text x="80" y="65" text-anchor="middle" fill="#ecf0f1" font-size="14" font-weight="700">Pa-233</text>
+                        </g>
+
+                        <!-- Uranium node -->
+                        <g id="uranium" transform="translate(550,60)">
+                            <circle cx="80" cy="60" r="50" fill="rgba(255,215,0,0.12)" stroke="#ffd700" stroke-width="3" />
+                            <text x="80" y="65" text-anchor="middle" fill="#2c3e50" font-size="14" font-weight="700">U-233</text>
+                        </g>
+
+                        <!-- Arrows with simple animation -->
+                        <path d="M200 110 L300 110" stroke="url(#g1)" stroke-width="4" marker-end="url(#arrow)">
+                            <animate attributeName="stroke-dashoffset" from="200" to="0" dur="2s" repeatCount="indefinite" />
+                        </path>
+                        <path d="M430 110 L520 110" stroke="url(#g1)" stroke-width="4" marker-end="url(#arrow)">
+                            <animate attributeName="stroke-dashoffset" from="200" to="0" dur="2.5s" repeatCount="indefinite" />
+                        </path>
+
+                        <!-- Labels under nodes -->
+                        <text x="170" y="150" fill="#bdc3c7" font-size="13" data-i18n="diagram.step1">1) Neutron capture: Th-232 → Th-233</text>
+                        <text x="400" y="150" fill="#bdc3c7" font-size="13" data-i18n="diagram.step2">2) Beta decay: Th-233 → Pa-233</text>
+                        <text x="630" y="150" fill="#bdc3c7" font-size="13" data-i18n="diagram.step3">3) Beta decay: Pa-233 → U-233 (fissile)</text>
+                    </svg>
+
+                    <p data-i18n="diagram.desc">Thorium-232 bombarderes med neutroner og gennem en række beta-reaktioner omdannes det til fissilt Uran-233, som kan anvendes i reaktorer med lavere langtidsaffald og forbedret sikkerhedsegenskaber.</p>
                 </div>
 
                 <div class="cards-grid">
@@ -796,18 +803,7 @@
 
             <!-- Interactive Quiz -->
                 <section class="section" id="quiz">
-            <!-- Feedback Section -->
-            <section class="feedback-section" id="feedback">
-                <h2 data-i18n="feedback.title">Feedback & Kontakt</h2>
-                    <form class="feedback-form" aria-label="Feedback form">
-                        <input type="text" name="name" placeholder="Navn" aria-label="Navn" required data-i18n-placeholder="feedback.name"><br>
-                        <input type="email" name="email" placeholder="Email" aria-label="Email" required data-i18n-placeholder="feedback.email"><br>
-                        <textarea name="message" rows="4" placeholder="Din besked" aria-label="Din besked" required data-i18n-placeholder="feedback.message"></textarea><br>
-                        <button type="submit" data-i18n="feedback.send">Send</button>
-                    </form>
-                    <div id="feedback-success" role="status" aria-live="polite" style="display:none;color:var(--eu-yellow);margin-top:15px;" data-i18n="feedback.thanks">Tak for din besked!</div>
-            </section>
-                <h2 class="section-title">Test Din Viden</h2>
+                <h2 class="section-title" data-i18n="quiz.title">Test Din Viden</h2>
                 <div class="quiz">
                     <div class="quiz-question">
                         <h3>Hvor stor en andel af EU's energiforbrug importeres i dag?</h3>
@@ -883,12 +879,7 @@
             }
         }
 
-            // Feedback form handler
-            document.querySelector('.feedback-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                document.getElementById('feedback-success').style.display = 'block';
-                this.reset();
-            });
+            // feedback form removed
 
         // Smooth scrolling for CTA button
         document.querySelector('.cta-button').addEventListener('click', function(e) {
@@ -935,7 +926,6 @@
                     'nav.timeline': 'Plan',
                     'nav.impact': 'EU Impact',
                     'nav.quiz': 'Quiz',
-                    'nav.feedback': 'Feedback',
                     'hero.title': 'Thorium Initiative',
                     'hero.subtitle': "The EU's path to energy independence through thorium-based nuclear power",
                     'hero.cta': 'Explore the solution',
@@ -944,12 +934,12 @@
                     'timeline.title': 'Implementation Plan',
                     'impact.title': 'Impact Analysis for the EU',
                     'quiz.title': 'Test Your Knowledge',
-                    'feedback.title': 'Feedback & Contact',
-                    'feedback.name': 'Name',
-                    'feedback.email': 'Email',
-                    'feedback.message': 'Your message',
-                    'feedback.send': 'Send',
-                    'feedback.thanks': 'Thanks for your message!'
+                    'diagram.title': 'Thorium-232 → Uran-233 cycle',
+                    'diagram.step1': '1) Neutron capture: Th-232 → Th-233',
+                    'diagram.step2': '2) Beta decay: Th-233 → Pa-233',
+                    'diagram.step3': '3) Beta decay: Pa-233 → U-233 (fissile)',
+                    'diagram.desc': 'Thorium-232 captures neutrons and through beta decays becomes fissile Uranium-233, which can be used in reactors with lower long-term waste and inherent safety benefits.',
+                    // feedback keys removed
                 },
                 da: {
                     siteTitle: 'Thorium Initiative',
@@ -959,7 +949,6 @@
                     'nav.timeline': 'Plan',
                     'nav.impact': 'EU Analyse',
                     'nav.quiz': 'Quiz',
-                    'nav.feedback': 'Feedback',
                     'hero.title': 'Thorium Initiative',
                     'hero.subtitle': "EU's Vej til Energiuafhængighed gennem Thorium-baseret Atomkraft",
                     'hero.cta': 'Udforsk Løsningen',
@@ -968,12 +957,12 @@
                     'timeline.title': 'Implementeringsplan',
                     'impact.title': 'Konsekvensanalyse for EU',
                     'quiz.title': 'Test Din Viden',
-                    'feedback.title': 'Feedback & Kontakt',
-                    'feedback.name': 'Navn',
-                    'feedback.email': 'Email',
-                    'feedback.message': 'Din besked',
-                    'feedback.send': 'Send',
-                    'feedback.thanks': 'Tak for din besked!'
+                    'diagram.title': 'Thorium-232 → Uran-233 Cyklus',
+                    'diagram.step1': '1) Neutronfangst: Th-232 → Th-233',
+                    'diagram.step2': '2) Betanedbrydning: Th-233 → Pa-233',
+                    'diagram.step3': '3) Betanedbrydning: Pa-233 → U-233 (fissilt)',
+                    'diagram.desc': 'Thorium-232 optager neutroner og gennem betanedbrydninger omdannes det til fissilt Uran-233, som kan bruges i reaktorer med lavere langtidsaffald og forbedret sikkerhed.',
+                    // feedback keys removed
                 }
             };
 
