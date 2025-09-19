@@ -192,6 +192,39 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
+        /* Modal styles */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal {
+            background: linear-gradient(180deg, rgba(52,73,94,0.98), rgba(44,62,80,0.98));
+            color: #ecf0f1;
+            max-width: 900px;
+            width: calc(100% - 40px);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            transform: translateY(-10px);
+            transition: transform 180ms ease, opacity 180ms ease;
+        }
+        .modal.show { display: block; }
+        .modal h3 { margin-top:0; }
+        .modal-close {
+            background: transparent;
+            border: 2px solid rgba(236,240,241,0.08);
+            color: #ecf0f1;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            float: right;
+        }
+
         /* Main Content */
         main {
             position: relative;
@@ -630,6 +663,26 @@
         </div>
     </header>
 
+    <!-- How it works modal -->
+    <div id="modal-backdrop" class="modal-backdrop" aria-hidden="true">
+        <div id="how-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="how-title">
+            <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+            <h3 id="how-title" data-i18n="modal.title">How it works</h3>
+            <p data-i18n="modal.intro">An overview of how thorium is converted into fissile material and used safely in next-generation reactors.</p>
+            <div class="modal-content">
+                <h4 data-i18n="modal.step1.title">1) Neutron capture</h4>
+                <p data-i18n="modal.step1.text">Thorium-232 captures a neutron and becomes Th-233, which quickly beta-decays to Pa-233.</p>
+                <h4 data-i18n="modal.step2.title">2) Beta decay</h4>
+                <p data-i18n="modal.step2.text">Pa-233 decays into U-233, a fissile isotope suitable for reactor fuel.</p>
+                <h4 data-i18n="modal.step3.title">3) Reactor use</h4>
+                <p data-i18n="modal.step3.text">U-233 sustains controlled fission, generating heat for electricity while producing less long-lived waste.</p>
+            </div>
+            <div style="text-align:right;margin-top:12px;">
+                <button id="modal-close-2" class="modal-close" data-i18n="modal.close">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main id="main-content">
         <div class="container">
@@ -979,6 +1032,15 @@
                     'timeline.phase3.budget': '€50-100 billion',
                     'timeline.phase3.goal': "Goal: Thorium covers 10–15% of the EU energy mix; 50+ thorium plants operational across Europe.",
                     'timeline.phase3.result': 'Result: EU energy independence secured; significant CO₂ reductions.',
+                    'modal.title': 'How it works',
+                    'modal.intro': 'An overview of how thorium is converted into fissile material and used safely in next-generation reactors.',
+                    'modal.step1.title': '1) Neutron capture',
+                    'modal.step1.text': 'Th-232 captures a neutron and becomes Th-233, which beta-decays to Pa-233.',
+                    'modal.step2.title': '2) Beta decay',
+                    'modal.step2.text': 'Pa-233 decays into U-233, a fissile isotope suitable for reactor fuel.',
+                    'modal.step3.title': '3) Reactor use',
+                    'modal.step3.text': 'U-233 sustains controlled fission, generating heat for electricity while producing less long-lived waste.',
+                    'modal.close': 'Close',
                     // feedback keys removed
                 },
                 da: {
@@ -1035,6 +1097,15 @@
                     'timeline.phase3.budget': '€50-100 milliarder',
                     'timeline.phase3.goal': 'Mål: Thorium dækker 10–15% af EU\'s energimix; 50+ thoriumanlæg i drift på tværs af Europa.',
                     'timeline.phase3.result': 'Resultat: EU\'s energiuafhængighed sikret; betydelige CO₂-reduktioner.',
+                    'modal.title': 'Hvordan det virker',
+                    'modal.intro': 'En oversigt over, hvordan thorium omdannes til fissilt materiale og anvendes sikkert i næste generation af reaktorer.',
+                    'modal.step1.title': '1) Neutronfangst',
+                    'modal.step1.text': 'Th-232 optager en neutron og bliver til Th-233, som betanedbrydes til Pa-233.',
+                    'modal.step2.title': '2) Betanedbrydning',
+                    'modal.step2.text': 'Pa-233 nedbrydes til U-233, en fissil isotop egnet til brændsel.',
+                    'modal.step3.title': '3) Anvendelse i reaktor',
+                    'modal.step3.text': 'U-233 opretholder kontrolleret fission og producerer varme til elektricitet med mindre langtidsholdbart affald.',
+                    'modal.close': 'Luk',
                     // feedback keys removed
                 }
             };
@@ -1100,6 +1171,46 @@
             g.addEventListener('focus', () => showTooltip(ttId, g));
             g.addEventListener('blur', () => hideTooltip(ttId));
         });
+
+        // Modal behavior
+        const backdrop = document.getElementById('modal-backdrop');
+        const modal = document.getElementById('how-modal');
+        const openBtn = document.querySelector('.cta-button');
+        const closeBtns = [document.getElementById('modal-close'), document.getElementById('modal-close-2')];
+        let lastFocused = null;
+
+        function openModal() {
+            lastFocused = document.activeElement;
+            backdrop.style.display = 'flex';
+            backdrop.setAttribute('aria-hidden', 'false');
+            modal.focus();
+            // trap focus
+            document.addEventListener('focus', trapFocus, true);
+            document.addEventListener('keydown', escClose);
+        }
+
+        function closeModal() {
+            backdrop.style.display = 'none';
+            backdrop.setAttribute('aria-hidden', 'true');
+            document.removeEventListener('focus', trapFocus, true);
+            document.removeEventListener('keydown', escClose);
+            if (lastFocused) lastFocused.focus();
+        }
+
+        function escClose(e) {
+            if (e.key === 'Escape') closeModal();
+        }
+
+        function trapFocus(e) {
+            if (!modal.contains(e.target)) {
+                e.stopPropagation();
+                modal.focus();
+            }
+        }
+
+        openBtn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+        closeBtns.forEach(b => b && b.addEventListener('click', closeModal));
+
 
         // Add parallax effect on scroll
         document.addEventListener('scroll', () => {
