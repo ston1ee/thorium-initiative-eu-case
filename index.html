@@ -658,16 +658,16 @@
                 
                 <div class="cards-grid">
                     <div class="card">
-                        <h3>🚨 Energikrise</h3>
-                        <p>EU importerer 58% af sit energiforbrug, primært fra ustabile regioner. Rusland-afhængigheden er faldet fra 45% (2021) til 19% (2024), men vi mangler stadig langsigtede løsninger.</p>
+                        <h3 data-i18n="card.crisis">🚨 Energikrise</h3>
+                        <p data-i18n="card.crisis.p">EU importerer 58% af sit energiforbrug, primært fra ustabile regioner. Rusland-afhængigheden er faldet fra 45% (2021) til 19% (2024), men vi mangler stadig langsigtede løsninger.</p>
                     </div>
                     <div class="card">
-                        <h3>💰 Økonomisk Byrde</h3>
-                        <p>Høje energipriser presser både husholdninger og industri. €730 milliarder skal investeres i transmissionsnet frem mod 2040.</p>
+                        <h3 data-i18n="card.econ">💰 Økonomisk Byrde</h3>
+                        <p data-i18n="card.econ.p">Høje energipriser presser både husholdninger og industri. €730 milliarder skal investeres i transmissionsnet frem mod 2040.</p>
                     </div>
                     <div class="card">
-                        <h3>🌍 Klimamål</h3>
-                        <p>EU's mål om 42,5% vedvarende energi i 2030 kræver stabile basisload-kilder for at kompensere for vindstille og mørke perioder.</p>
+                        <h3 data-i18n="card.climate">🌍 Klimamål</h3>
+                        <p data-i18n="card.climate.p">EU's mål om 42,5% vedvarende energi i 2030 kræver stabile basisload-kilder for at kompensere for vindstille og mørke perioder.</p>
                     </div>
                 </div>
             </section>
@@ -679,7 +679,7 @@
                 <div class="thorium-cycle" role="img" aria-label="Thorium to Uranium cycle diagram">
                     <h3 data-i18n="diagram.title">Thorium-232 → Uran-233 Cyklus</h3>
                     <!-- SVG explanatory diagram -->
-                    <svg width="100%" height="260" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+                    <svg id="thorium-svg" width="100%" height="260" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
                         <defs>
                             <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
                                 <path d="M0,0 L10,5 L0,10 L3,5 z" fill="#95a5a6" />
@@ -691,19 +691,19 @@
                         </defs>
 
                         <!-- Thorium node -->
-                        <g id="thorium" transform="translate(90,60)">
+                        <g id="thorium" transform="translate(90,60)" tabindex="0" role="button" aria-describedby="tt-thorium">
                             <circle cx="80" cy="60" r="50" fill="rgba(0,82,180,0.15)" stroke="#0052b4" stroke-width="3" />
                             <text x="80" y="65" text-anchor="middle" fill="#ecf0f1" font-size="14" font-weight="700">Th-232</text>
                         </g>
 
                         <!-- Protactinium node -->
-                        <g id="protactinium" transform="translate(320,60)">
+                        <g id="protactinium" transform="translate(320,60)" tabindex="0" role="button" aria-describedby="tt-protactinium">
                             <circle cx="80" cy="60" r="50" fill="rgba(0,82,180,0.08)" stroke="#7f8c8d" stroke-width="3" />
                             <text x="80" y="65" text-anchor="middle" fill="#ecf0f1" font-size="14" font-weight="700">Pa-233</text>
                         </g>
 
                         <!-- Uranium node -->
-                        <g id="uranium" transform="translate(550,60)">
+                        <g id="uranium" transform="translate(550,60)" tabindex="0" role="button" aria-describedby="tt-uranium">
                             <circle cx="80" cy="60" r="50" fill="rgba(255,215,0,0.12)" stroke="#ffd700" stroke-width="3" />
                             <text x="80" y="65" text-anchor="middle" fill="#2c3e50" font-size="14" font-weight="700">U-233</text>
                         </g>
@@ -722,21 +722,28 @@
                         <text x="630" y="150" fill="#bdc3c7" font-size="13" data-i18n="diagram.step3">3) Beta decay: Pa-233 → U-233 (fissile)</text>
                     </svg>
 
+                    <!-- Tooltip containers (visually hidden until used) -->
+                    <div id="tooltip" role="status" aria-live="polite" style="position:relative;">
+                        <div id="tt-thorium" class="svg-tooltip" style="display:none;position:absolute;background:rgba(44,62,80,0.95);color:#fff;padding:10px;border-radius:8px;border:1px solid rgba(149,165,166,0.2);max-width:280px;">Thorium-232: fertile material that captures neutrons.</div>
+                        <div id="tt-protactinium" class="svg-tooltip" style="display:none;position:absolute;background:rgba(44,62,80,0.95);color:#fff;padding:10px;border-radius:8px;border:1px solid rgba(149,165,166,0.2);max-width:280px;">Protactinium-233: intermediate produced by beta decay.</div>
+                        <div id="tt-uranium" class="svg-tooltip" style="display:none;position:absolute;background:rgba(44,62,80,0.95);color:#fff;padding:10px;border-radius:8px;border:1px solid rgba(149,165,166,0.2);max-width:280px;">Uranium-233: fissile material useful in reactors.</div>
+                    </div>
+
                     <p data-i18n="diagram.desc">Thorium-232 bombarderes med neutroner og gennem en række beta-reaktioner omdannes det til fissilt Uran-233, som kan anvendes i reaktorer med lavere langtidsaffald og forbedret sikkerhedsegenskaber.</p>
                 </div>
 
                 <div class="cards-grid">
                     <div class="card">
-                        <h3>⚡ Teknisk Fordel</h3>
-                        <p>Thorium er 3-4 gange mere udbredt end uran og kan ikke bruges til våbenfremstilling. Reaktorerne kan ikke smelte ned og producerer 99% mindre langtidsradioaktivt affald.</p>
+                        <h3 data-i18n="card.tech">⚡ Teknisk Fordel</h3>
+                        <p data-i18n="card.tech.p">Thorium er 3-4 gange mere udbredt end uran og kan ikke bruges til våbenfremstilling. Reaktorerne kan ikke smelte ned og producerer 99% mindre langtidsradioaktivt affald.</p>
                     </div>
                     <div class="card">
-                        <h3>🔒 Forsyningssikkerhed</h3>
-                        <p>Thorium findes i politisk stabile lande som Australien, Indien og Norge. EU kan opnå total energiuafhængighed på dette område.</p>
+                        <h3 data-i18n="card.security">🔒 Forsyningssikkerhed</h3>
+                        <p data-i18n="card.security.p">Thorium findes i politisk stabile lande som Australien, Indien og Norge. EU kan opnå total energiuafhængighed på dette område.</p>
                     </div>
                     <div class="card">
-                        <h3>🌱 Miljøvenlig</h3>
-                        <p>Thorium-reaktorer er CO₂-neutrale og producerer stabil basisload-energi, der kan komplementere vindkraft og solenergi perfekt.</p>
+                        <h3 data-i18n="card.env">🌱 Miljøvenlig</h3>
+                        <p data-i18n="card.env.p">Thorium-reaktorer er CO₂-neutrale og producerer stabil basisload-energi, der kan komplementere vindkraft og solenergi perfekt.</p>
                     </div>
                 </div>
             </section>
@@ -747,29 +754,29 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-year">2026-2030: Fase 1</div>
-                            <h4>Forskning & Udvikling</h4>
-                            <p><strong>Budget:</strong> €5-10 milliarder</p>
-                            <p><strong>Mål:</strong> Udvikle thorium-reaktor prototyper i samarbejde mellem Frankrig, Finland og Tjekkiet. Etablér forskningscentre og international koordination.</p>
-                            <p><strong>Resultat:</strong> Funktionsdygtig thorium-reaktor klar til kommerciel implementering.</p>
+                            <div class="timeline-year" data-i18n="timeline.phase1.year">2026-2030: Fase 1</div>
+                            <h4 data-i18n="timeline.phase1.title">Forskning & Udvikling</h4>
+                            <p><strong data-i18n="timeline.phase1.budgetLabel">Budget:</strong> <span data-i18n="timeline.phase1.budget">€5-10 milliarder</span></p>
+                            <p data-i18n="timeline.phase1.goal"><strong>Mål:</strong> Udvikle thorium-reaktor prototyper i samarbejde mellem Frankrig, Finland og Tjekkiet. Etablér forskningscentre og international koordination.</p>
+                            <p data-i18n="timeline.phase1.result"><strong>Resultat:</strong> Funktionsdygtig thorium-reaktor klar til kommerciel implementering.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-year">2031-2035: Fase 2</div>
-                            <h4>Pilot-projekter & Byggeri</h4>
-                            <p><strong>Budget:</strong> €20-30 milliarder</p>
-                            <p><strong>Mål:</strong> Byg 5-10 thorium-kraftværker i pro-atom lande. Test integration med eksisterende elnet og vindkraft/solenergi.</p>
-                            <p><strong>Resultat:</strong> Bewis for thorium-teknologiens kommercielle levedygtighed og sikkerhed.</p>
+                            <div class="timeline-year" data-i18n="timeline.phase2.year">2031-2035: Fase 2</div>
+                            <h4 data-i18n="timeline.phase2.title">Pilot-projekter & Byggeri</h4>
+                            <p><strong data-i18n="timeline.phase2.budgetLabel">Budget:</strong> <span data-i18n="timeline.phase2.budget">€20-30 milliarder</span></p>
+                            <p data-i18n="timeline.phase2.goal"><strong>Mål:</strong> Byg 5-10 thorium-kraftværker i pro-atom lande. Test integration med eksisterende elnet og vindkraft/solenergi.</p>
+                            <p data-i18n="timeline.phase2.result"><strong>Resultat:</strong> Bewis for thorium-teknologiens kommercielle levedygtighed og sikkerhed.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-year">2036-2040: Fase 3</div>
-                            <h4>Fuld Skalering</h4>
-                            <p><strong>Budget:</strong> €50-100 milliarder</p>
-                            <p><strong>Mål:</strong> Thorium dækker 10-15% af EU's energimix. 50+ thorium-kraftværker i drift på tværs af Europa.</p>
-                            <p><strong>Resultat:</strong> EU's energiuafhængighed sikret, CO₂-emissioner reduceret med 20%.</p>
+                            <div class="timeline-year" data-i18n="timeline.phase3.year">2036-2040: Fase 3</div>
+                            <h4 data-i18n="timeline.phase3.title">Fuld Skalering</h4>
+                            <p><strong data-i18n="timeline.phase3.budgetLabel">Budget:</strong> <span data-i18n="timeline.phase3.budget">€50-100 milliarder</span></p>
+                            <p data-i18n="timeline.phase3.goal"><strong>Mål:</strong> Thorium dækker 10-15% af EU's energimix. 50+ thorium-kraftværker i drift på tværs af Europa.</p>
+                            <p data-i18n="timeline.phase3.result"><strong>Resultat:</strong> EU's energiuafhængighed sikret, CO₂-emissioner reduceret med 20%.</p>
                         </div>
                     </div>
                 </div>
@@ -939,6 +946,39 @@
                     'diagram.step2': '2) Beta decay: Th-233 → Pa-233',
                     'diagram.step3': '3) Beta decay: Pa-233 → U-233 (fissile)',
                     'diagram.desc': 'Thorium-232 captures neutrons and through beta decays becomes fissile Uranium-233, which can be used in reactors with lower long-term waste and inherent safety benefits.',
+                    'tooltip.thorium': 'Thorium-232: fertile material that captures neutrons and begins the breeding cycle.',
+                    'tooltip.protactinium': 'Protactinium-233: short-lived intermediate produced during decay to U-233.',
+                    'tooltip.uranium': 'Uranium-233: fissile isotope used to sustain chain reactions in reactors.',
+                    'card.crisis': 'Energy crisis',
+                    'card.crisis.p': 'The EU imports 58% of its energy, mainly from unstable regions. Dependence on Russia fell from 45% (2021) to 19% (2024), but long-term solutions are still needed.',
+                    'card.econ': 'Economic burden',
+                    'card.econ.p': 'High energy prices pressure households and industry. €730 billion will be required for transmission investments through 2040.',
+                    'card.climate': 'Climate targets',
+                    'card.climate.p': "The EU's 42.5% renewables target by 2030 requires stable baseload sources to cover low-wind/low-sun periods.",
+                    'card.tech': 'Technical advantage',
+                    'card.tech.p': 'Thorium is 3–4x more abundant than uranium and not usable for weapons. Reactors are meltdown-resistant and produce far less long-lived waste.',
+                    'card.security': 'Supply security',
+                    'card.security.p': 'Thorium exists in politically stable countries such as Australia, India and Norway. The EU can increase energy independence.',
+                    'card.env': 'Environmentally friendly',
+                    'card.env.p': 'Thorium reactors are effectively CO₂-neutral and provide stable baseload that complements wind and solar.',
+                    'timeline.phase1.year': '2026-2030: Phase 1',
+                    'timeline.phase1.title': 'Research & Development',
+                    'timeline.phase1.budgetLabel': 'Budget:',
+                    'timeline.phase1.budget': '€5-10 billion',
+                    'timeline.phase1.goal': 'Goal: Develop thorium reactor prototypes with France, Finland and Czechia. Establish research centers and international coordination.',
+                    'timeline.phase1.result': 'Result: Operational thorium reactor ready for commercial deployment.',
+                    'timeline.phase2.year': '2031-2035: Phase 2',
+                    'timeline.phase2.title': 'Pilot projects & Construction',
+                    'timeline.phase2.budgetLabel': 'Budget:',
+                    'timeline.phase2.budget': '€20-30 billion',
+                    'timeline.phase2.goal': 'Goal: Build 5–10 thorium plants in pro-nuclear countries and test grid integration.',
+                    'timeline.phase2.result': 'Result: Proof of commercial viability and safety.',
+                    'timeline.phase3.year': '2036-2040: Phase 3',
+                    'timeline.phase3.title': 'Full scaling',
+                    'timeline.phase3.budgetLabel': 'Budget:',
+                    'timeline.phase3.budget': '€50-100 billion',
+                    'timeline.phase3.goal': "Goal: Thorium covers 10–15% of the EU energy mix; 50+ thorium plants operational across Europe.",
+                    'timeline.phase3.result': 'Result: EU energy independence secured; significant CO₂ reductions.',
                     // feedback keys removed
                 },
                 da: {
@@ -962,6 +1002,39 @@
                     'diagram.step2': '2) Betanedbrydning: Th-233 → Pa-233',
                     'diagram.step3': '3) Betanedbrydning: Pa-233 → U-233 (fissilt)',
                     'diagram.desc': 'Thorium-232 optager neutroner og gennem betanedbrydninger omdannes det til fissilt Uran-233, som kan bruges i reaktorer med lavere langtidsaffald og forbedret sikkerhed.',
+                    'tooltip.thorium': 'Thorium-232: fertilt materiale, der optager neutroner og starter avlscyklussen.',
+                    'tooltip.protactinium': 'Protactinium-233: kortlivet mellemprodukt, der dannes under omdannelsen til U-233.',
+                    'tooltip.uranium': 'Uranium-233: fissilt isotop, som kan holde en kædereaktion i reaktorer.',
+                    'card.crisis': 'Energikrise',
+                    'card.crisis.p': 'EU importerer 58% af sit energiforbrug, primært fra ustabile regioner. Rusland-afhængigheden er faldet fra 45% (2021) til 19% (2024), men vi mangler stadig langsigtede løsninger.',
+                    'card.econ': 'Økonomisk byrde',
+                    'card.econ.p': 'Høje energipriser presser både husholdninger og industri. €730 milliarder skal investeres i transmissionsnet frem mod 2040.',
+                    'card.climate': 'Klimamål',
+                    'card.climate.p': 'EU\'s mål om 42,5% vedvarende energi i 2030 kræver stabile basisload-kilder for at kompensere for vindstille og mørke perioder.',
+                    'card.tech': 'Teknisk fordel',
+                    'card.tech.p': 'Thorium er 3-4 gange mere udbredt end uran og kan ikke bruges til våbenfremstilling. Reaktorerne kan ikke smelte ned og producerer 99% mindre langtidsradioaktivt affald.',
+                    'card.security': 'Forsyningssikkerhed',
+                    'card.security.p': 'Thorium findes i politisk stabile lande som Australien, Indien og Norge. EU kan opnå større energiuafhængighed.',
+                    'card.env': 'Miljøvenlig',
+                    'card.env.p': 'Thorium-reaktorer er CO₂-neutrale og producerer stabil basislast, der komplementerer vind og sol.',
+                    'timeline.phase1.year': '2026-2030: Fase 1',
+                    'timeline.phase1.title': 'Forskning & Udvikling',
+                    'timeline.phase1.budgetLabel': 'Budget:',
+                    'timeline.phase1.budget': '€5-10 milliarder',
+                    'timeline.phase1.goal': 'Mål: Udvikle thorium-reaktorprototyper med Frankrig, Finland og Tjekkiet. Etablere forskningscentre og international koordinering.',
+                    'timeline.phase1.result': 'Resultat: Funktionsdygtig thorium-reaktor klar til kommerciel implementering.',
+                    'timeline.phase2.year': '2031-2035: Fase 2',
+                    'timeline.phase2.title': 'Pilotprojekter & Byggeri',
+                    'timeline.phase2.budgetLabel': 'Budget:',
+                    'timeline.phase2.budget': '€20-30 milliarder',
+                    'timeline.phase2.goal': 'Mål: Byg 5–10 thoriumanlæg i pro-atomlande og test netintegration.',
+                    'timeline.phase2.result': 'Resultat: Bevis for kommerciel levedygtighed og sikkerhed.',
+                    'timeline.phase3.year': '2036-2040: Fase 3',
+                    'timeline.phase3.title': 'Fuld skalering',
+                    'timeline.phase3.budgetLabel': 'Budget:',
+                    'timeline.phase3.budget': '€50-100 milliarder',
+                    'timeline.phase3.goal': 'Mål: Thorium dækker 10–15% af EU\'s energimix; 50+ thoriumanlæg i drift på tværs af Europa.',
+                    'timeline.phase3.result': 'Resultat: EU\'s energiuafhængighed sikret; betydelige CO₂-reduktioner.',
                     // feedback keys removed
                 }
             };
@@ -994,6 +1067,39 @@
                 const next = current === 'da' ? 'en' : 'da';
                 applyTranslations(next);
             });
+
+        // Tooltip behavior for SVG nodes
+        function showTooltip(id, targetEl) {
+            const tt = document.getElementById(id);
+            if (!tt) return;
+            // set translated text if available
+            const lang = localStorage.getItem('siteLang') || savedLang;
+            const i18nKey = id === 'tt-thorium' ? 'tooltip.thorium' : id === 'tt-protactinium' ? 'tooltip.protactinium' : 'tooltip.uranium';
+            if (i18n[lang] && i18n[lang][i18nKey]) tt.textContent = i18n[lang][i18nKey];
+
+            tt.style.display = 'block';
+            // position relative to svg element
+            const rect = targetEl.getBoundingClientRect();
+            tt.style.left = (rect.left + window.scrollX + rect.width / 2) + 'px';
+            tt.style.top = (rect.top + window.scrollY + rect.height + 10) + 'px';
+            tt.style.transform = 'translateX(-50%)';
+        }
+
+        function hideTooltip(id) {
+            const tt = document.getElementById(id);
+            if (tt) tt.style.display = 'none';
+        }
+
+        // attach handlers for each node
+        ['thorium','protactinium','uranium'].forEach(name => {
+            const g = document.getElementById(name);
+            if (!g) return;
+            const ttId = name === 'thorium' ? 'tt-thorium' : name === 'protactinium' ? 'tt-protactinium' : 'tt-uranium';
+            g.addEventListener('mouseenter', () => showTooltip(ttId, g));
+            g.addEventListener('mouseleave', () => hideTooltip(ttId));
+            g.addEventListener('focus', () => showTooltip(ttId, g));
+            g.addEventListener('blur', () => hideTooltip(ttId));
+        });
 
         // Add parallax effect on scroll
         document.addEventListener('scroll', () => {
