@@ -619,6 +619,20 @@
             z-index: 9999;
             text-decoration: none;
         }
+
+        /* SVG tooltip */
+        .svg-tooltip {
+            display: none;
+            position: absolute;
+            background: rgba(44,62,80,0.95);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(149,165,166,0.2);
+            max-width: 280px;
+            z-index: 2500;
+            transform-origin: top center;
+        }
     </style>
 </head>
 <body>
@@ -764,11 +778,11 @@
                     </svg>
 
                     <!-- Tooltip containers (visually hidden until used) -->
-                    <div id="tooltip" role="status" aria-live="polite" style="position:relative;">
-                        <div id="tt-thorium" class="svg-tooltip" style="display:none;position:absolute;background:rgba(44,62,80,0.95);color:#fff;padding:10px;border-radius:8px;border:1px solid rgba(149,165,166,0.2);max-width:280px;">Thorium-232: fertile material that captures neutrons.</div>
-                        <div id="tt-protactinium" class="svg-tooltip" style="display:none;position:absolute;background:rgba(44,62,80,0.95);color:#fff;padding:10px;border-radius:8px;border:1px solid rgba(149,165,166,0.2);max-width:280px;">Protactinium-233: intermediate produced by beta decay.</div>
-                        <div id="tt-uranium" class="svg-tooltip" style="display:none;position:absolute;background:rgba(44,62,80,0.95);color:#fff;padding:10px;border-radius:8px;border:1px solid rgba(149,165,166,0.2);max-width:280px;">Uranium-233: fissile material useful in reactors.</div>
-                    </div>
+                        <div id="tooltip" role="status" aria-live="polite" style="position:relative;">
+                            <div id="tt-thorium" class="svg-tooltip">Thorium-232: fertile material that captures neutrons.</div>
+                            <div id="tt-protactinium" class="svg-tooltip">Protactinium-233: intermediate produced by beta decay.</div>
+                            <div id="tt-uranium" class="svg-tooltip">Uranium-233: fissile material useful in reactors.</div>
+                        </div>
 
                     <p data-i18n="diagram.desc">Thorium-232 bombarderes med neutroner og gennem en række beta-reaktioner omdannes det til fissilt Uran-233, som kan anvendes i reaktorer med lavere langtidsaffald og forbedret sikkerhedsegenskaber.</p>
                 </div>
@@ -902,10 +916,7 @@
             }
         }
 
-            // Language switcher (demo only)
-            document.querySelector('.lang-switch').addEventListener('click', function() {
-                alert('Language switcher is a demo. Full translation coming soon!');
-            });
+            // Language switcher removed: initialization still reads savedLang/browser default
 
         // Quiz functionality
         function selectAnswer(element, isCorrect) {
