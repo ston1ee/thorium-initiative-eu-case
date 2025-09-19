@@ -11,6 +11,11 @@
             box-sizing: border-box;
         }
 
+            :root {
+                --eu-blue: #0052b4;
+                --eu-yellow: #ffd700;
+            }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
@@ -19,11 +24,73 @@
             overflow-x: hidden;
         }
 
+            a {
+                color: var(--eu-blue);
+                text-decoration: underline;
+                transition: color 0.2s;
+            }
+            a:hover {
+                color: var(--eu-yellow);
+            }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
+            /* Navbar */
+            .navbar {
+                width: 100%;
+                background: linear-gradient(90deg, var(--eu-blue) 80%, var(--eu-yellow) 100%);
+                color: #fff;
+                padding: 0.5rem 0;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                box-shadow: 0 2px 8px rgba(44,62,80,0.1);
+            }
+            .navbar .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .navbar-logo {
+                font-weight: bold;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+            }
+            .navbar-links {
+                display: flex;
+                gap: 2rem;
+            }
+            .navbar-links a {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 500;
+                padding: 0.3rem 0.7rem;
+                border-radius: 8px;
+                transition: background 0.2s;
+            }
+            .navbar-links a:hover {
+                background: var(--eu-yellow);
+                color: var(--eu-blue);
+            }
+            .lang-switch {
+                background: #fff;
+                color: var(--eu-blue);
+                border: none;
+                border-radius: 8px;
+                padding: 0.3rem 0.7rem;
+                font-weight: 600;
+                cursor: pointer;
+                margin-left: 1rem;
+            }
+            .lang-switch:hover {
+                background: var(--eu-yellow);
+                color: var(--eu-blue);
+            }
 
         /* Animated Background Particles */
         .particle {
@@ -65,6 +132,11 @@
             backdrop-filter: blur(10px);
         }
 
+            /* Add top margin for header to avoid overlap with navbar */
+            header {
+                margin-top: 60px;
+            }
+
         .hero-title {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
@@ -102,6 +174,12 @@
             border: 2px solid rgba(149, 165, 166, 0.3);
             animation: pulse 2s infinite;
         }
+
+            .cta-button {
+                background: linear-gradient(45deg, var(--eu-blue), var(--eu-yellow));
+                color: #fff;
+                border: none;
+            }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(149, 165, 166, 0.4); }
@@ -161,6 +239,10 @@
             position: relative;
             overflow: hidden;
         }
+
+            .card {
+                box-shadow: 0 4px 16px rgba(44,62,80,0.08);
+            }
 
         .card::before {
             content: '';
@@ -419,6 +501,43 @@
             backdrop-filter: blur(10px);
         }
 
+            /* Feedback Section */
+            .feedback-section {
+                background: rgba(52, 73, 94, 0.7);
+                padding: 40px;
+                border-radius: 20px;
+                margin: 40px 0;
+                backdrop-filter: blur(10px);
+                text-align: center;
+            }
+            .feedback-section h2 {
+                color: var(--eu-yellow);
+                margin-bottom: 20px;
+            }
+            .feedback-form input,
+            .feedback-form textarea {
+                width: 80%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                border: 1px solid #bdc3c7;
+                font-size: 1rem;
+            }
+            .feedback-form button {
+                background: var(--eu-blue);
+                color: #fff;
+                border: none;
+                border-radius: 8px;
+                padding: 10px 30px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .feedback-form button:hover {
+                background: var(--eu-yellow);
+                color: var(--eu-blue);
+            }
+
         /* Trademark */
         .trademark {
             position: fixed;
@@ -490,6 +609,22 @@
     </style>
 </head>
 <body>
+        <!-- Navbar -->
+        <nav class="navbar" aria-label="Main navigation">
+            <div class="container">
+                <span class="navbar-logo" aria-label="Thorium Initiative">Thorium Initiative</span>
+                <div class="navbar-links">
+                    <a href="#main-content">Forside</a>
+                    <a href="#problem">Problem</a>
+                    <a href="#solution">Løsning</a>
+                    <a href="#timeline">Plan</a>
+                    <a href="#impact">EU Analyse</a>
+                    <a href="#quiz">Quiz</a>
+                    <a href="#feedback">Feedback</a>
+                </div>
+                <button class="lang-switch" aria-label="Skift sprog">EN/DA</button>
+            </div>
+        </nav>
     <!-- Animated Background -->
     <div class="pattern-overlay"></div>
     
@@ -507,7 +642,7 @@
         <div class="container">
             
             <!-- Problem Section -->
-            <section class="section">
+                <section class="section" id="problem">
                 <h2 class="section-title">Problemet: EU's Energiafhængighed</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -545,7 +680,7 @@
             </section>
 
             <!-- Solution Section -->
-            <section class="section">
+                <section class="section" id="solution">
                 <h2 class="section-title">Løsningen: Thorium Initiative</h2>
                 
                 <div class="thorium-cycle">
@@ -571,7 +706,7 @@
             </section>
 
             <!-- Implementation Timeline -->
-            <section class="section">
+                <section class="section" id="timeline">
                 <h2 class="section-title">Implementeringsplan</h2>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -605,7 +740,7 @@
             </section>
 
             <!-- EU Impact Analysis -->
-            <section class="section">
+                <section class="section" id="impact">
                 <h2 class="section-title">Konsekvensanalyse for EU</h2>
                 <div class="cards-grid">
                     <div class="card">
@@ -631,7 +766,18 @@
             </section>
 
             <!-- Interactive Quiz -->
-            <section class="section">
+                <section class="section" id="quiz">
+            <!-- Feedback Section -->
+            <section class="feedback-section" id="feedback">
+                <h2>Feedback & Kontakt</h2>
+                <form class="feedback-form" aria-label="Feedback form">
+                    <input type="text" name="name" placeholder="Navn" aria-label="Navn" required><br>
+                    <input type="email" name="email" placeholder="Email" aria-label="Email" required><br>
+                    <textarea name="message" rows="4" placeholder="Din besked" aria-label="Din besked" required></textarea><br>
+                    <button type="submit">Send</button>
+                </form>
+                <div id="feedback-success" style="display:none;color:var(--eu-yellow);margin-top:15px;">Tak for din besked!</div>
+            </section>
                 <h2 class="section-title">Test Din Viden</h2>
                 <div class="quiz">
                     <div class="quiz-question">
@@ -663,6 +809,12 @@
     <!-- Trademark -->
     <div class="trademark">M.S ™ 2025</div>
 
+        <!-- Cookie Consent Banner -->
+        <div id="cookie-banner" style="position:fixed;bottom:0;left:0;width:100%;background:var(--eu-blue);color:#fff;padding:15px 0;text-align:center;z-index:2000;display:none;">
+            <span>Vi bruger cookies for at forbedre din oplevelse. <a href="#" style="color:var(--eu-yellow);text-decoration:underline;">Læs mere</a></span>
+            <button id="cookie-accept" style="margin-left:20px;background:var(--eu-yellow);color:var(--eu-blue);border:none;border-radius:8px;padding:8px 20px;font-weight:600;cursor:pointer;">Acceptér</button>
+        </div>
+
     <script>
         // Create floating particles
         function createParticles() {
@@ -676,6 +828,11 @@
                 document.body.appendChild(particle);
             }
         }
+
+            // Language switcher (demo only)
+            document.querySelector('.lang-switch').addEventListener('click', function() {
+                alert('Language switcher is a demo. Full translation coming soon!');
+            });
 
         // Quiz functionality
         function selectAnswer(element, isCorrect) {
@@ -697,6 +854,13 @@
             }
         }
 
+            // Feedback form handler
+            document.querySelector('.feedback-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                document.getElementById('feedback-success').style.display = 'block';
+                this.reset();
+            });
+
         // Smooth scrolling for CTA button
         document.querySelector('.cta-button').addEventListener('click', function(e) {
             e.preventDefault();
@@ -705,8 +869,30 @@
             });
         });
 
+            // Navbar links smooth scroll
+            document.querySelectorAll('.navbar-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
         // Initialize particles when page loads
         window.addEventListener('load', createParticles);
+
+            // Cookie consent banner
+            window.addEventListener('load', function() {
+                if (!localStorage.getItem('cookieAccepted')) {
+                    document.getElementById('cookie-banner').style.display = 'block';
+                }
+            });
+            document.getElementById('cookie-accept').addEventListener('click', function() {
+                localStorage.setItem('cookieAccepted', 'true');
+                document.getElementById('cookie-banner').style.display = 'none';
+            });
 
         // Add parallax effect on scroll
         document.addEventListener('scroll', () => {
