@@ -732,7 +732,9 @@
                 <div class="thorium-cycle" role="img" aria-label="Thorium to Uranium cycle diagram">
                     <h3 data-i18n="diagram.title">Thorium-232 → Uran-233 Cyklus</h3>
                     <!-- SVG explanatory diagram -->
-                    <svg id="thorium-svg" width="100%" height="260" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+                    <svg id="thorium-svg" width="100%" height="260" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgTitle svgDesc">
+                        <title id="svgTitle">Thorium breeding cycle diagram</title>
+                        <desc id="svgDesc">Diagram showing neutron capture and beta decays converting Thorium-232 to Uranium-233 via Protactinium-233.</desc>
                         <defs>
                             <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
                                 <path d="M0,0 L10,5 L0,10 L3,5 z" fill="#95a5a6" />
@@ -744,19 +746,19 @@
                         </defs>
 
                         <!-- Thorium node -->
-                        <g id="thorium" transform="translate(90,60)" tabindex="0" role="button" aria-describedby="tt-thorium">
+                        <g id="thorium" transform="translate(90,60)" tabindex="0" role="button" aria-describedby="tt-thorium" aria-label="Thorium-232 node">
                             <circle cx="80" cy="60" r="50" fill="rgba(0,82,180,0.15)" stroke="#0052b4" stroke-width="3" />
                             <text x="80" y="65" text-anchor="middle" fill="#ecf0f1" font-size="14" font-weight="700">Th-232</text>
                         </g>
 
                         <!-- Protactinium node -->
-                        <g id="protactinium" transform="translate(320,60)" tabindex="0" role="button" aria-describedby="tt-protactinium">
+                        <g id="protactinium" transform="translate(320,60)" tabindex="0" role="button" aria-describedby="tt-protactinium" aria-label="Protactinium-233 node">
                             <circle cx="80" cy="60" r="50" fill="rgba(0,82,180,0.08)" stroke="#7f8c8d" stroke-width="3" />
                             <text x="80" y="65" text-anchor="middle" fill="#ecf0f1" font-size="14" font-weight="700">Pa-233</text>
                         </g>
 
                         <!-- Uranium node -->
-                        <g id="uranium" transform="translate(550,60)" tabindex="0" role="button" aria-describedby="tt-uranium">
+                        <g id="uranium" transform="translate(550,60)" tabindex="0" role="button" aria-describedby="tt-uranium" aria-label="Uranium-233 node">
                             <circle cx="80" cy="60" r="50" fill="rgba(255,215,0,0.12)" stroke="#ffd700" stroke-width="3" />
                             <text x="80" y="65" text-anchor="middle" fill="#2c3e50" font-size="14" font-weight="700">U-233</text>
                         </g>
@@ -1170,6 +1172,14 @@
             g.addEventListener('mouseleave', () => hideTooltip(ttId));
             g.addEventListener('focus', () => showTooltip(ttId, g));
             g.addEventListener('blur', () => hideTooltip(ttId));
+            // keyboard toggle with Enter/Space
+            g.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const tt = document.getElementById(ttId);
+                    if (tt.style.display === 'block') hideTooltip(ttId); else showTooltip(ttId, g);
+                }
+            });
         });
 
         // Modal behavior
@@ -1183,6 +1193,8 @@
             lastFocused = document.activeElement;
             backdrop.style.display = 'flex';
             backdrop.setAttribute('aria-hidden', 'false');
+            document.querySelector('main').setAttribute('aria-hidden', 'true');
+            modal.setAttribute('tabindex','-1');
             modal.focus();
             // trap focus
             document.addEventListener('focus', trapFocus, true);
@@ -1192,6 +1204,7 @@
         function closeModal() {
             backdrop.style.display = 'none';
             backdrop.setAttribute('aria-hidden', 'true');
+            document.querySelector('main').removeAttribute('aria-hidden');
             document.removeEventListener('focus', trapFocus, true);
             document.removeEventListener('keydown', escClose);
             if (lastFocused) lastFocused.focus();
