@@ -12,9 +12,7 @@ Projektet præsenterer vores forslag: "Thorium Initiative" - en trin-for-trin pl
 2. **Bygning & Integration (2031-2035)**: 20-30 mia. euro til kommercielle reaktorer  
 3. **Skalering & Regulering (2036-2040)**: 10-15% af EU's energimix
 
-## 🌐 Interaktiv Hjemmeside
-Se vores interaktive præsentation: [thorium-initiative.html](https://ditt-brugernavn.github.io/thorium-initiative-eu-case/thorium-initiative.html)
-
+Se vores interaktive præsentation: [index.html](https://ston1ee.github.io/thorium-initiative-eu-case/)
 ### Features:
 - 📅 **Interaktiv tidslinje** med implementeringsfaser
 - ⚛️ **Thorium-cyklus simulator** der viser energiproduktion
