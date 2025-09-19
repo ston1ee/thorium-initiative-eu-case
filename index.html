@@ -77,20 +77,7 @@
                 background: var(--eu-yellow);
                 color: var(--eu-blue);
             }
-            .lang-switch {
-                background: #fff;
-                color: var(--eu-blue);
-                border: none;
-                border-radius: 8px;
-                padding: 0.3rem 0.7rem;
-                font-weight: 600;
-                cursor: pointer;
-                margin-left: 1rem;
-            }
-            .lang-switch:hover {
-                background: var(--eu-yellow);
-                color: var(--eu-blue);
-            }
+            /* language switch removed */
 
         /* Animated Background Particles */
         .particle {
@@ -648,7 +635,6 @@
                     <a href="#impact" data-i18n="nav.impact">EU Analyse</a>
                     <a href="#quiz" data-i18n="nav.quiz">Quiz</a>
                 </div>
-                <button class="lang-switch" aria-label="Skift sprog">EN/DA</button>
             </div>
         </nav>
     <!-- Animated Background -->
@@ -1134,12 +1120,7 @@
             const savedLang = localStorage.getItem('siteLang') || (navigator.language && navigator.language.startsWith('en') ? 'en' : 'da');
             applyTranslations(savedLang);
 
-            // Wire up language switcher to toggle between en/da
-            document.querySelector('.lang-switch').addEventListener('click', function() {
-                const current = localStorage.getItem('siteLang') || savedLang;
-                const next = current === 'da' ? 'en' : 'da';
-                applyTranslations(next);
-            });
+            // Language toggle UI removed. Language still initializes from savedLang or browser default.
 
         // Tooltip behavior for SVG nodes
         function showTooltip(id, targetEl) {
